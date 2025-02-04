@@ -124,8 +124,9 @@ ollama run deepseek-r1 "一句话总结哪吒闹海的故事"
 
 ``` shell
 % docker pull ghcr.io/open-webui/open-webui:main
+``` 
 
-docker pull ghcr.io/open-webui/open-webui:main
+``` tex
 main: Pulling from open-webui/open-webui
 7ce705000c39: Pull complete
 d02d1a1ced20: Pull complete
@@ -159,6 +160,8 @@ docker run \
     --restart always ghcr.io/open-webui/open-webui:main
 
 ```
+
+docker pull 
 
 ![alt text](image-7.png)
 
