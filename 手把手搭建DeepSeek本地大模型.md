@@ -260,3 +260,4 @@ INFO:     connection open
 | StarCoder2    | BigCode       | [StarCoder2官网](https://huggingface.co/docs/transformers/main/model_doc/starcoder2) | 代码生成模型，支持600多种编程语言。                              |
 | DeepSeek Coder| DeepSeek      | [DeepSeek官网](https://www.deepseek.com/)            | 一个强大的代码语言模型系列，适用于代码生成、代码补全等多种任务。        |
 | LLaVA         | 开源社区      | [LLaVA官网](https://github.com/haotian-liu/LLaVA)   | 结合了视觉编码器（如 CLIP）和大型语言模型（如 LLaMA 或 Vicuna），能够处理图像和文本的联合任务，适合高性能设备。 |
+| LLaVA-Phi3  | 微软 + 开源社区  | [LLaVA-Ph3官网](https://github.com/haotian-liu/LLaVA)  | 继承了 LLaVA 的多模态能力，同时在性能和效率上进行了优化，适合资源受限的环境。 |
