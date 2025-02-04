@@ -193,13 +193,7 @@ docker run -d \
 
 第一次启动Open WebUI时，需要一个等待的过程，会看到如下内容。
 
-``` tex
-Running migrations
-INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
-INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
-INFO  [open_webui.env] 'ENABLE_SIGNUP' loaded from the latest database entry
-INFO  [open_webui.env] 'DEFAULT_LOCALE' loaded from the latest database entry
-INFO  [open_webui.env] 'DEFAULT_PROMPT_SUGGESTIONS' loaded from the latest database entry
+``` text
 WARNI [open_webui.env] 
 WARNING: CORS_ALLOW_ORIGIN IS SET TO '*' - NOT RECOMMENDED FOR PRODUCTION DEPLOYMENTS.
 INFO  [open_webui.env] Embedding model set: sentence-transformers/all-MiniLM-L6-v2
@@ -220,12 +214,6 @@ INFO:     Started server process [1]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
-INFO:     ('172.17.0.1', 64498) - "WebSocket /ws/socket.io/?EIO=4&transport=websocket" [accepted]
-INFO:     connection open
-INFO:     ('172.17.0.1', 64508) - "WebSocket /ws/socket.io/?EIO=4&transport=websocket" [accepted]
-INFO:     connection open
-INFO:     ('172.17.0.1', 64518) - "WebSocket /ws/socket.io/?EIO=4&transport=websocket" [accepted]
-INFO:     connection open
 ```
 
 现在可以直接打开[http://localhost:8080/]访问Open WebUI了。
