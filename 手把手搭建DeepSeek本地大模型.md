@@ -196,3 +196,108 @@ docker run -d \
     --name ollama_container \
     -p 11434:11434 ollama/ollama
 ```
+
+
+模型名称
+
+提供方
+
+官网地址
+
+说明
+
+LLaMA3
+
+Meta AI
+
+https://ai.facebook.com/tools/llama/
+
+大型语言模型，专注于高效的自然语言处理任务。
+
+TinyLlama
+
+开源社区
+
+https://github.com/tinyllama
+
+轻量级的语言模型，适用于资源受限的环境。
+
+Qwen2/Qwen2.5
+
+阿里云
+
+https://qwen.ai/
+
+多模态语言模型，支持文本和图像处理。
+
+Phi-3
+
+微软
+
+https://www.microsoft.com/phi-3
+
+小型语言模型，专注于高效能和低资源消耗。
+
+Gemma
+
+谷歌
+
+https://ai.google/gemma
+
+开源语言模型，适用于多种自然语言处理任务。
+
+WizardLM2
+
+微软
+
+https://github.com/WizardLM
+
+专注于对话生成和任务导向对话的语言模型。
+
+Orca Mini
+
+开源社区
+
+https://github.com/orca-mini
+
+小型语言模型，专注于对话生成和问答任务。
+
+Codellama
+
+Meta AI
+
+https://ai.meta.com/
+
+基于Llama 2的大型代码语言模型，提供多种版本，具备填充能力、支持大型输入上下文，以及编程任务的零样本指令跟随能力。
+
+StarCoder2
+
+BigCode
+
+https://huggingface.co/docs/transformers/main/model_doc/starcoder2
+
+代码生成模型，支持600多种编程语言。
+
+DeepSeek Coder
+
+DeepSeek
+
+https://www.deepseek.com/
+
+一个强大的代码语言模型系列，适用于代码生成、代码补全等多种任务。
+
+LLaVA
+
+开源社区
+
+https://github.com/haotian-liu/LLaVA
+
+结合了视觉编码器（如 CLIP）和大型语言模型（如 LLaMA 或 Vicuna），能够处理图像和文本的联合任务，适合高性能设备。
+
+LLaVA-Phi3
+
+微软 + 开源社区
+
+https://github.com/haotian-liu/LLaVA
+
+继承了 LLaVA 的多模态能力，同时在性能和效率上进行了优化，适合资源受限的环境。
