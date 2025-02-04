@@ -250,6 +250,7 @@ INFO:     connection open
 | 模型名称      | 提供方        | 官网地址                                             | 说明                                                       |
 |---------------|---------------|----------------------------------------------------|------------------------------------------------------------|
 | LLaMA3        | Meta AI       | [LLaMA3官网](https://ai.facebook.com/tools/llama/) | 大型语言模型，专注于高效的自然语言处理任务。                       |
+| DeepSeek-R1 | DeepSeek      | [DeepSeek官网](https://www.deepseek.com/)            | 深度求索公司开发的深度学习模型搜索引擎，当前最新版本DeepSeek-R1。        |
 | TinyLlama     | 开源社区      | [TinyLlama官网](https://github.com/tinyllama)       | 轻量级的语言模型，适用于资源受限的环境。                           |
 | Qwen2/Qwen2.5  | 阿里云        | [Qwen官网](https://qwen.ai/)                        | 多模态语言模型，支持文本和图像处理。                              |
 | Phi-3         | 微软          | [Phi-3官网](https://www.microsoft.com/phi-3)         | 小型语言模型，专注于高效能和低资源消耗。                           |
