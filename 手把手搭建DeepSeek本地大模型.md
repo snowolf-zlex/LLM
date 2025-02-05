@@ -124,7 +124,7 @@ ollama run deepseek-r1:1.5b "讲讲哪吒闹海的故事"
 或者，你可以执行以下命令，进行多轮对话。
 
 ``` shell
-ollama run deepseek-r1
+ollama run deepseek-r1:1.5b
 ```
 
 ## 搭建Web服务
