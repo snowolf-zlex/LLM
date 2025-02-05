@@ -112,13 +112,11 @@ success
 现在可以跟DeepSeek聊天了，启动Ollama并运行DeepSeek-R1大模型。
 
 ``` shell
-ollama run deepseek-r1 "天空为什么是蓝色的？"
+ollama run deepseek-r1:1.5b "天空为什么是蓝色的？"
 ```
 
-或者，你可以执行以下命令，进行多轮对话。
-
 ``` shell
-ollama run deepseek-r1
+ollama run deepseek-r1:1.5b "讲讲哪吒闹海的故事"
 ```
 
 或者，你可以执行以下命令，进行多轮对话。
@@ -162,6 +160,17 @@ docker run -d -p 9000:9000 -p 9443:9443 --name=portainer --restart always -v /va
 docker run -d \
     -v open-webui:/app/backend/data \
     --add-host=host.docker.internal:host-gateway \
+    -p 8080:8080 \
+    --name open-webui \
+    --restart always ghcr.io/open-webui/open-webui:main
+```
+
+或者
+
+``` shell
+docker run -d \
+    -v open-webui:/app/backend/data \
+    -e OLLAMA_BASE_URL=http://127.0.0.1:11434 \
     -p 8080:8080 \
     --name open-webui \
     --restart always ghcr.io/open-webui/open-webui:main
