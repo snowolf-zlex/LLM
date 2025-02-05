@@ -221,7 +221,7 @@ What's next:
 ``` shell
 docker run -d \
     -v open-webui:/app/backend/data \
-    -e OLLAMA_BASE_URL=http://127.0.0.1:11434 \
+    --add-host=host.docker.internal:host-gateway \
     -p 8080:8080 \
     --name open-webui \
     --restart always ghcr.io/open-webui/open-webui:main
@@ -232,21 +232,10 @@ docker run -d \
 ``` shell
 docker run \
     -v open-webui:/app/backend/data \
-    -e OLLAMA_BASE_URL=http://127.0.0.1:11434 \
+    --add-host=host.docker.internal:host-gateway \
     -p 8080:8080 \
     --name open-webui \
     --restart always ghcr.io/open-webui/open-webui:main
-```
-
-遇到SSL错误？使用如下命令启动。
-
-``` shell
-docker run -d \
-    -p 8000:8080 \
-    --add-host=host.docker.internal:host-gateway \
-    -v open-webui:/app/backend/data \
-    --name open-webui \
-    --restart always \ghcr.io/open-webui/open-webui:main
 ```
 
 第一次启动Open WebUI时，需要一个等待的过程，会看到如下内容。
