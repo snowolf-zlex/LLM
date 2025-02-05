@@ -55,6 +55,7 @@ curl -fsSL https://ollama.com/install.sh | sh
 
 ``` shell
 sudo docker pull ollama/ollama
+docker run -d --name ollama_container ollama/ollama
 ```
 
 ### Ollama命令
