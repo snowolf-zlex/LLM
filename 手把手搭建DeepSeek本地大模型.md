@@ -147,7 +147,14 @@ Portainer同样也是一个Docker镜像，执行以下命令直接拉取Docker�
 
 ``` shell
 docker volume create portainer_data
-docker run -d -p 9000:9000 -p 9443:9443 --name=portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+docker run -d \
+    -p 9000:9000 \
+    -p 9443:9443 \
+    --name=portainer \
+    --restart always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v portainer_data:/data \
+    portainer/portainer-ce
 ```
 
 然后登陆(<http://localhost:9000>)注册并登录后就可以进入管理界面。
@@ -176,6 +183,7 @@ ERROR [open_webui.routers.ollama] Connection error: Cannot connect to host 127.0
 ``` shell
 docker run -d \
     -v open-webui:/app/backend/data \
+    --add-host=host.docker.internal:11434 \
     -e OLLAMA_BASE_URL=http://127.0.0.1:11434 \
     -p 8080:8080 \
     --name open-webui \
