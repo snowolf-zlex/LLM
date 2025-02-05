@@ -69,6 +69,8 @@ curl -fsSL https://ollama.com/install.sh | sh
 ``` shell
 docker run -d \
     -p 11434:11434\
+    --runtime=nvidia \
+    -e NVIDIA_VISIBLE_DEVICE=all \
     --name ollama_container \
     ollama/ollama
 ```
