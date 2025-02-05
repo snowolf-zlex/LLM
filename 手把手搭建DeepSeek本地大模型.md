@@ -58,7 +58,7 @@ Ollama官网[下载](https://ollama.com/download)安装包，直接安装。
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-本地浏览器打开(<http://localhost:9000>)页面，看到如下提示，就说明Ollama正常运行了。
+本地浏览器打开(<http://localhost:11434>)页面，看到如下提示，就说明Ollama正常运行了。
 
 ``` text
 Ollama is running
