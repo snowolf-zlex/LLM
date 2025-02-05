@@ -1,8 +1,8 @@
 # 手把手搭建DeepSeek本地大模型
 
-不得不说，最近大模型获得一塌糊涂，DeepSeek大杀四方。
+不得不说，最近大模型火得一塌糊涂，尤其是DeepSeek大杀四方。
 
-奈何DeepSeek与黑客日夜大战，影响我使用大模型，于是乎，我把它塞进了我的PC机。
+奈何DeepSeek与黑客日夜大战，影响我使用大模型。于是乎，我把它塞进了我的PC机。
 
 在正式开始部署本地大模型之前，先对齐基本概念。
 
@@ -44,39 +44,40 @@ Portainer 是一个基于 Web 的轻量级 Docker 容器管理工具，它使得
 
 ## 部署Ollama
 
-到Ollama官网[下载Olama](https://ollama.com/download)安装包。
+部署OLlama有3种方式：  
 
-又或者，你和我一样，喜欢命令行操作。在终端执行以下代码，将Ollama部署到本机。
+### 1.官网下载后手动安装
+
+适用于绝大多数桌面操作系统，但**不适合Ubuntu 22 版本系统**。
+
+Ollama官网[下载](https://ollama.com/download)安装包，直接安装。
+
+### 2.命令安装
+
+同样适用于绝大多数桌面操作系统，并且有一定技术基础的老手，但仍旧**不适合Ubuntu 22 版本系统**。
+
+执行以下代码，命令方式安装OLlama。
 
 ``` shell
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
+### 3.Docker部署
+
+适用于**Ubuntu 22版本系统**用户。
 
 ``` shell
-sudo docker pull ollama/ollama
-docker run -d --name ollama_container ollama/ollama
+docker run -d \
+    -p 11434:11434\
+    --name ollama_container \
+    ollama/ollama
 ```
 
-### Ollama命令
+之后可通过如下方式进入Ollama容器。
 
-趁着命令执行过程中，先大概了解下Ollama的命令。
-
-| 命令            | 作用                         |
-|-----------------|------------------------------|
-| `ollama serve`  | 启动 ollama                   |
-| `ollama create` | 从模型文件创建模型            |
-| `ollama show`   | 显示模型信息                  |
-| `ollama run`    | 运行模型                      |
-| `ollama pull`   | 从注册表中拉取模型            |
-| `ollama push`   | 将模型推送到注册表            |
-| `ollama list`   | 列出模型                      |
-| `ollama ps`     | 列出运行的模型                |
-| `ollama cp`     | 复制模型                      |
-| `ollama rm`     | 删除模型                      |
-| `ollama help`   | 获取有关任何命令的帮助信息    |
-
-一般情况下，我们会用`ollama run <LLM>`就足够用了。
+``` shell
+docker exec -it ollama_container /bin/bash
+```
 
 ## 部署DeepSeek
 
@@ -84,7 +85,7 @@ DeepSeek-R1是最近发布的大模型，号称超越ChatGPT-4o。
 
 为方便演示，使用DeepSeek-R1的1.5B小参数集模型。
 
-执行以下代码，拉取DeepSeek-R1:1.5B版本
+执行以下代码，拉取DeepSeek-R1:1.5B版本。
 
 ``` shell
 ollama pull deepseek-r1:1.5b
@@ -139,52 +140,17 @@ ollama run deepseek-r1
 Portainer同样也是一个Docker镜像，执行以下命令直接拉取Docker镜像并部署容器。
 
 ``` shell
-sudo docker volume create portainer_data
-sudo docker run -d -p 9000:9000 -p 9443:9443 --name=portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+docker volume create portainer_data
+docker run -d -p 9000:9000 -p 9443:9443 --name=portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 ```
 
-然后登陆[http://localhost:9000]注册并登录后就可以进入管理界面。
+然后登陆[Portainer](http://localhost:9000)注册并登录后就可以进入管理界面。
 
 <img  src="images/portainer-1.png" width="500" />
 
 ### 部署Open WebUI
 
-在终端执行以下代码，拉取Open WebUI Docker镜像。
-
-``` shell
-% docker pull ghcr.io/open-webui/open-webui:main
-```
-
-耐心等候镜像拉取，受网络情况影响，可能需要重新执行该命令。
-
-``` tex
-main: Pulling from open-webui/open-webui
-7ce705000c39: Pull complete
-d02d1a1ced20: Pull complete
-8c2bfb64ec8e: Pull complete
-1c510bbba845: Pull complete
-c1b66c7e5efa: Pull complete
-4f4fb700ef54: Pull complete
-cef437bcef5f: Pull complete
-77456adf2b22: Pull complete
-815479942156: Pull complete
-293c52404a14: Pull complete
-b7fca0b068c8: Pull complete
-b9defacaa06c: Pull complete
-690490b2e7dc: Pull complete
-b5f1de319771: Pull complete
-40635cddd89d: Pull complete
-Digest: sha256:b2c83b5c7b9b244999307b4b1c0e195d41268f3d3a62b84b470c0cea5c5743fd
-Status: Downloaded newer image for ghcr.io/open-webui/open-webui:main
-ghcr.io/open-webui/open-webui:main
-
-What's next:
-    View a summary of image vulnerabilities and recommendations → docker scout quickview ghcr.io/open-webui/open-webui:main
-```
-
-### 启动Open WebUI
-
-执行以下代码，启动Open WebUI服务
+执行以下代码，拉取Docker镜像，并启动Open WebUI服务
 
 ``` shell
 docker run -d \
@@ -195,18 +161,7 @@ docker run -d \
     --restart always ghcr.io/open-webui/open-webui:main
 ```
 
-或者，去掉参数`-d`，直接后台运行，这样可以观察到实时进展。
-
-``` shell
-docker run \
-    -v open-webui:/app/backend/data \
-    --add-host=host.docker.internal:host-gateway \
-    -p 8080:8080 \
-    --name open-webui \
-    --restart always ghcr.io/open-webui/open-webui:main
-```
-
-第一次启动Open WebUI时，需要一个等待的过程，会看到如下内容。
+第一次启动Open WebUI时，需要一个等待的过程，在后台日志中会看到如下内容。
 
 ``` text
 WARNI [open_webui.env] 
@@ -231,7 +186,7 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 ```
 
-现在可以直接打开[http://localhost:8080/]访问Open WebUI了。
+现在可以直接打开[Open WebUI](http://localhost:8080)访问Open WebUI了。
 
 第一次使用Open WebUI需要注册管理员账号。
 
@@ -244,7 +199,6 @@ INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 <img  src="images/configure_llm.png" width="300" />
 
 接下来就可以使用Open WebUI进行大模型对话了。
-
 
 ## 附录：推荐模型
 
