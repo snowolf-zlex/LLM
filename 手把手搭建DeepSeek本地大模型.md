@@ -79,6 +79,12 @@ docker run -d \
 docker exec -it ollama_container /bin/bash
 ```
 
+本地浏览器打开(<http://localhost:9000>)页面，看到如下提示，就说明Ollama正常运行了。
+
+``` test
+Ollama is running
+```
+
 ## 部署DeepSeek
 
 DeepSeek-R1是最近发布的大模型，号称超越ChatGPT-4o。
@@ -144,7 +150,7 @@ docker volume create portainer_data
 docker run -d -p 9000:9000 -p 9443:9443 --name=portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 ```
 
-然后登陆[Portainer](http://localhost:9000)注册并登录后就可以进入管理界面。
+然后登陆(<http://localhost:9000>)注册并登录后就可以进入管理界面。
 
 <img  src="images/portainer-1.png" width="500" />
 
@@ -186,7 +192,7 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 ```
 
-现在可以直接打开[Open WebUI](http://localhost:8080)访问Open WebUI了。
+现在可以直接打开(<http://localhost:8080>)访问Open WebUI了。
 
 第一次使用Open WebUI需要注册管理员账号。
 
