@@ -167,6 +167,10 @@ docker run -d \
     --restart always ghcr.io/open-webui/open-webui:main
 ```
 
+``` text
+ERROR [open_webui.routers.ollama] Connection error: Cannot connect to host 127.0.0.1:11434 ssl:default [Connect call failed ('127.0.0.1', 11434)]
+```
+
 或者
 
 ``` shell
