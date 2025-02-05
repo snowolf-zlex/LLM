@@ -36,6 +36,12 @@ Open WebUI是一个开源的 Web 用户界面（UI）框架，用于简化 Web �
 
 Docker是一个开源的容器化平台，用于自动化应用程序的部署、扩展和管理。它通过将应用程序及其所有依赖项（包括操作系统库和环境）打包到一个标准化的容器中，使得应用能够在任何环境中一致运行，无论是开发、测试还是生产环境。换言之，Docker是另一艘货轮，用来运载已经打包好的服务，比如我们后面要讲的Open WebUI。
 
+### Portainer
+
+<img  src="images/Portainer.png" width="300" />
+
+Portainer 是一个基于 Web 的轻量级 Docker 容器管理工具，它使得管理和监控 Docker 环境变得更加简单和直观。通过 Portainer，用户可以通过图形化界面对 Docker 容器、镜像、网络、数据卷等资源进行管理，无需使用命令行，从而提高了使用 Docker 的便捷性和效率。
+
 ## 部署Ollama
 
 到Ollama官网[下载Olama](https://ollama.com/download)安装包。
@@ -128,6 +134,12 @@ ollama run deepseek-r1 "一句话总结哪吒闹海的故事"
 
 看来DeepSeek还有点中英文杂合的特色，可能1.5B版本模型还差些火候，有待优化。
 
+或者，你可以执行以下命令，进行多轮对话。
+
+``` shell
+ollama run deepseek-r1
+```
+
 ## 搭建Web服务
 
 终端极客版本的大模型用起来看着不那么友好，还是Web界面操作更有亲和力。
@@ -141,6 +153,19 @@ ollama run deepseek-r1 "一句话总结哪吒闹海的故事"
 - [Linux版本命令安装](https://docs.docker.com/desktop/setup/install/linux/)  
 
 注意区分CPU架构版本，只要能正常启动Docker就可以部署Open WebUI了。
+
+### 部署Portainer
+
+Portainer同样也是一个Docker镜像，执行以下命令直接拉取Docker镜像并部署容器。
+
+``` shell
+sudo docker volume create portainer_data
+sudo docker run -d -p 9000:9000 -p 9443:9443 --name=portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+```
+
+然后登陆[http://localhost:9000]注册并登录后就可以进入管理界面。
+
+<img  src="images/portainer-1.png" width="500" />
 
 ### 部署Open WebUI
 
@@ -188,7 +213,28 @@ docker run -d \
     -p 8080:8080 \
     --name open-webui \
     --restart always ghcr.io/open-webui/open-webui:main
+```
 
+或者，去掉参数`-d`，直接后台运行，这样可以观察到实时进展。
+
+``` shell
+docker run \
+    -v open-webui:/app/backend/data \
+    -e OLLAMA_BASE_URL=http://127.0.0.1:11434 \
+    -p 8080:8080 \
+    --name open-webui \
+    --restart always ghcr.io/open-webui/open-webui:main
+```
+
+遇到SSL错误？使用如下命令启动
+
+``` shell
+docker run -d \
+    -p 3000:8080 \
+    --add-host=host.docker.internal:host-gateway \
+    -v open-webui:/app/backend/data \
+    --name open-webui \
+    --restart always \ghcr.io/open-webui/open-webui:main
 ```
 
 第一次启动Open WebUI时，需要一个等待的过程，会看到如下内容。
