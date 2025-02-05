@@ -44,7 +44,7 @@ Portainer 是一个基于 Web 的轻量级 Docker 容器管理工具，它使得
 
 ## 部署Ollama
 
-部署OLlama有3种方式：  
+部署OLlama有2种方式：  
 
 ### 1.官网下载后手动安装
 
@@ -62,28 +62,9 @@ Ollama官网[下载](https://ollama.com/download)安装包，直接安装。
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-### 3.Docker部署
-
-适用于**Ubuntu 22版本系统**用户。
-
-``` shell
-docker run -d \
-    -p 11434:11434\
-    --runtime=nvidia \
-    -e NVIDIA_VISIBLE_DEVICE=all \
-    --name ollama_container \
-    ollama/ollama
-```
-
-之后可通过如下方式进入Ollama容器。
-
-``` shell
-docker exec -it ollama_container /bin/bash
-```
-
 本地浏览器打开(<http://localhost:9000>)页面，看到如下提示，就说明Ollama正常运行了。
 
-``` test
+``` text
 Ollama is running
 ```
 
@@ -114,11 +95,11 @@ success
 现在可以跟DeepSeek聊天了，启动Ollama并运行DeepSeek-R1大模型。
 
 ``` shell
-ollama run deepseek-r1:1.5b "天空为什么是蓝色的？"
+ollama run deepseek-r1:1.5b "讲讲哪吒闹海的故事"
 ```
 
 ``` shell
-ollama run deepseek-r1:1.5b "讲讲哪吒闹海的故事"
+ollama run deepseek-r1:1.5b "聊聊封神榜"
 ```
 
 或者，你可以执行以下命令，进行多轮对话。
@@ -149,7 +130,6 @@ Portainer同样也是一个Docker镜像，执行以下命令直接拉取Docker�
 docker volume create portainer_data
 docker run -d \
     -p 9000:9000 \
-    -p 9443:9443 \
     --name=portainer \
     --restart always \
     -v /var/run/docker.sock:/var/run/docker.sock \
@@ -163,27 +143,11 @@ docker run -d \
 
 ### 部署Open WebUI
 
-执行以下代码，拉取Docker镜像，并启动Open WebUI服务
+一般情况下，执行以下代码，拉取Docker镜像，并启动Open WebUI服务。
 
 ``` shell
 docker run -d \
     -v open-webui:/app/backend/data \
-    --add-host=host.docker.internal:host-gateway \
-    -p 8080:8080 \
-    --name open-webui \
-    --restart always ghcr.io/open-webui/open-webui:main
-```
-
-``` text
-ERROR [open_webui.routers.ollama] Connection error: Cannot connect to host 127.0.0.1:11434 ssl:default [Connect call failed ('127.0.0.1', 11434)]
-```
-
-或者
-
-``` shell
-docker run -d \
-    -v open-webui:/app/backend/data \
-    --add-host=host.docker.internal:11434 \
     -e OLLAMA_BASE_URL=http://127.0.0.1:11434 \
     -p 8080:8080 \
     --name open-webui \
@@ -214,6 +178,42 @@ INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 ```
+
+### 异常情况
+
+难免在启动Open WebUI过程中会与遇到以下异常。
+
+``` text
+ERROR [open_webui.routers.ollama] Connection error: Cannot connect to host 127.0.0.1:11434 ssl:default [Connect call failed ('127.0.0.1', 11434)]
+```
+
+#### Apple M芯片用户
+
+设置Docker网关，按如下方式启动Open WebUI服务。
+
+``` shell
+docker run -d \
+    -v open-webui:/app/backend/data \
+    --add-host=host.docker.internal:host-gateway \
+    -p 8080:8080 \
+    --name open-webui \
+    --restart always ghcr.io/open-webui/open-webui:main
+```
+
+#### Ubuntu用户
+
+使用宿主机网络，按如下方式启动Open WebUI服务。
+
+``` shell
+docker run -d \
+    --network=host \
+    -v open-webui:/app/backend/data \
+    -e OLLAMA_BASE_URL=http://127.0.0.1:11434 \
+    --name open-webui \
+    --restart always ghcr.io/open-webui/open-webui:main
+```
+
+## 首次使用Open WebUI
 
 现在可以直接打开(<http://localhost:8080>)访问Open WebUI了。
 
