@@ -226,7 +226,7 @@ docker run \
     --restart always ghcr.io/open-webui/open-webui:main
 ```
 
-遇到SSL错误？使用如下命令启动
+遇到SSL错误？使用如下命令启动。
 
 ``` shell
 docker run -d \
