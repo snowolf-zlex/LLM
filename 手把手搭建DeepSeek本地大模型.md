@@ -52,6 +52,11 @@ Portainer 是一个基于 Web 的轻量级 Docker 容器管理工具，它使得
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
+
+``` shell
+sudo docker pull ollama/ollama
+```
+
 ### Ollama命令
 
 趁着命令执行过程中，先大概了解下Ollama的命令。
