@@ -42,12 +42,6 @@ Docker是一个开源的容器化平台，用于自动化应用程序的部署�
 
 Portainer 是一个基于 Web 的轻量级 Docker 容器管理工具，它使得管理和监控 Docker 环境变得更加简单和直观。通过 Portainer，用户可以通过图形化界面对 Docker 容器、镜像、网络、数据卷等资源进行管理，无需使用命令行，从而提高了使用 Docker 的便捷性和效率。
 
-### Portainer
-
-<img  src="images/Portainer.png" width="300" />
-
-Portainer 是一个基于 Web 的轻量级 Docker 容器管理工具，它使得管理和监控 Docker 环境变得更加简单和直观。通过 Portainer，用户可以通过图形化界面对 Docker 容器、镜像、网络、数据卷等资源进行管理，无需使用命令行，从而提高了使用 Docker 的便捷性和效率。
-
 ## 部署Ollama
 
 到Ollama官网[下载Olama](https://ollama.com/download)安装包。
